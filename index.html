@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Fun Zone</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #000000; /* Black background */
+            color: #ffffff; /* White text color */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevents scrolling */
+            position: relative; /* For z-index control */
+        }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 20px;
+            width: 90%;
+            height: 90%;
+            padding: 20px;
+            box-sizing: border-box;
+            background: radial-gradient(circle, rgba(255, 99, 71, 0.7), rgba(255, 140, 0, 0.7), rgba(255, 215, 0, 0.7), rgba(127, 255, 0, 0.7), rgba(0, 191, 255, 0.7), rgba(138, 43, 226, 0.7)); /* Rainbow radial gradient with transparency */
+            border-radius: 10px;
+            backdrop-filter: blur(10px); /* Adds blur effect */
+            overflow: hidden; /* Prevents scrolling */
+            position: relative; /* Allows z-index control */
+        }
+        .box {
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+        .box:hover {
+            transform: scale(1.05);
+        }
+        h1, h2 {
+            color: #ffffff; /* White title color */
+            text-align: center;
+            margin: 0 0 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8); /* Text shadow */
+        }
+        h1 {
+            font-size: 28px;
+        }
+        h2 {
+            font-size: 24px;
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin: 10px 0;
+            text-align: center;
+        }
+        button {
+            background-color: #3498db;
+            color: #ffffff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+            margin: 10px 0;
+            transition: background-color 0.2s;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #factList, #jokeList {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .empty-box {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-align: center;
+            color: #ffffff; /* White text color */
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8); /* Text shadow */
+        }
+        .animated-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind other content */
+        }
+        .animated-background div {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+            border-radius: 50%;
+            animation: animate 20s linear infinite;
+            bottom: -20px;
+        }
+        .animated-background div:nth-child(1) {
+            left: 10%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 0s;
+        }
+        .animated-background div:nth-child(2) {
+            left: 20%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 1.5s;
+            animation-duration: 18s;
+        }
+        .animated-background div:nth-child(3) {
+            left: 35%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 5.5s;
+        }
+        .animated-background div:nth-child(4) {
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            animation-delay: 0s;
+            animation-duration: 20s;
+        }
+        .animated-background div:nth-child(5) {
+            left: 65%;
+            width: 50px;
+            height: 50px;
+            animation-delay: 7s;
+        }
+        .animated-background div:nth-child(6) {
+            left: 80%;
+            width: 80px;
+            height: 80px;
+            animation-delay: 15s;
+            animation-duration: 18s;
+        }
+        @keyframes animate {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+                border-radius: 0;
+            }
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+                border-radius: 50%;
+            }
+        }
+        /* Universe effect */
+        .universe {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px), radial-gradient(circle, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+            background-size: 28px 28px;
+            z-index: -2; /* Behind animated background */
+            pointer-events: none; /* Allows clicks to pass through */
+        }
+    </style>
+</head>
+<body>
+    <!-- Universe effect -->
+    <div class="universe"></div>
+
+    <!-- Animated background -->
+    <div class="animated-background">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <h1>🌟 Intelligent Facts 🌟</h1>
+            <p>Explore fascinating facts and enjoy the visual effect!</p>
+            <button onclick="showNextFact()">Show Next Fact</button>
+            <div id="factList"></div>
+        </div>
+
+        <div class="box">
+            <h2>😂 Random Jokes 😂</h2>
+            <p>Want a laugh? Get a random joke!</p>
+            <button onclick="showRandomJoke()">Show Next Joke</button>
+            <div id="jokeList"></div>
+        </div>
+
+        <!-- Empty boxes with "Coming Soon" text -->
+        <div class="empty-box">Coming Soon</div>
+        <div class="empty-box">Coming Soon</div>
+        <div class="empty-box">Coming Soon</div>
+        <div class="empty-box">Coming Soon</div>
+        <div class="empty-box">Coming Soon</div>
+        <div class="empty-box">Coming Soon</div>
+    </div>
+
+    <script>
+        // JavaScript for interactivity
+        const facts = [
+            "Victorians once used leeches to predict the weather. A contraption called the Tempest Prognosticator used leeches’ behavior to forecast rain.",
+            "Your funny bone isn’t a bone at all—it’s the result of the ulnar nerve being bumped.",
+            "The chief translator of the European Parliament speaks 32 languages fluently.",
+            // Add more facts as needed
+        ];
+
+        const jokes = [
+            "Why don't scientists trust atoms? Because they make up everything!",
+            "Parallel lines have so much in common. It's a shame they'll never meet.",
+            // Add more jokes as needed
+        ];
+
+        let currentFactIndex = 0;
+        let currentJokeIndex = 0;
+
+        function showNextFact() {
+            const factList = document.getElementById('factList');
+            factList.innerHTML = facts[currentFactIndex];
+            currentFactIndex = (currentFactIndex + 1) % facts.length;
+        }
+
+        function showRandomJoke() {
+            const jokeList = document.getElementById('jokeList');
+            const randomJokeIndex = Math.floor(Math.random() * jokes.length);
+            jokeList.innerHTML = jokes[randomJokeIndex];
+        }
+    </script>
+</body>
+</html>
